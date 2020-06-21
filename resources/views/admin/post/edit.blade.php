@@ -18,13 +18,6 @@
                     @endif
                     
                     <div class="form-group row">
-                        <label class="col-md-12">ニックネーム</label>
-                        <div class="col-md-12">
-                            <input type="text" class="form-control" name="name" value="{{ $post_form->name }}">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group row">
                         <label class="col-md-12">お店の名前</label>
                         <div class="col-md-12">
                             <input type="text" class="form-control" name="storename" value="{{ $post_form->storename }}">
