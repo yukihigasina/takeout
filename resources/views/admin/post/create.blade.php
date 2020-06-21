@@ -8,7 +8,6 @@
             <div class="col-md-8 mx-auto">
                 <h2>テイクアウトできる飲食店を投稿する</h2>
                 
-                {{--送信先のurl--}}
                 <form action="{{ action('Admin\PostController@store') }}" method="post" enctype="multipart/form-data">
                     
                     @if (count($errors) > 0)
@@ -20,12 +19,6 @@
                     @endif
                     
                     
-                    <div class="form-group row">
-                        <label class="col-md-12">ニックネーム</label>
-                        <div class="col-md-12">
-                            <input type="text" class="form-control" name="name" value="{{ old('name') }}">
-                        </div>
-                    </div>
                     
                     <div class="form-group row">
                         <label class="col-md-12">お店の名前</label>

@@ -13,7 +13,7 @@
             <div class="col-md-8">
                 <form action="{{ action('Admin\PostController@index') }}" method="get">
                     <div class="form-group row">
-                        <label class="col-md-2">お店の名前</label>
+                        <label class="col-md-2">お店の名前で検索できます</label>
                         <div class="col-md-8">
                             <input type="text" class="form-control" name="cond_storename" value="{{ $cond_storename }}">
                         </div>

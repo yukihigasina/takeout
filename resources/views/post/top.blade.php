@@ -35,7 +35,7 @@
                     <a href="{{ action('Admin\PostController@create') }}" class="btn btn-regi">投稿する</a>
                 </div>
                 <div class="card-contents">
-                    <h2 class="text-title">更新情報</h2>
+                    <h2 class="text-title">更新情報(新着情報５件表示)</h2>
                     <div class="new">
                     @foreach($news as $new)
                     @if($loop->iteration<6)
@@ -45,9 +45,9 @@
                             <img class="card-img-top" src="{{ secure_asset('storage/image/'.$new->image_path) }}" >
                             <div class="card-body">
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item　card-place">{{$new->storename}}</li>
-                                    <li class="list-group-item　card-place">{{$new->place}}</li>
-                                    <li class="list-group-item　card-text">{{$new->body}}</li>
+                                    <li class="list-group-item　card-place">店名：{{$new->storename}}</li>
+                                    <li class="list-group-item　card-place">場所：{{$new->place}}</li>
+                                    <li class="list-group-item　card-text">コメント：{{$new->body}}</li>
                                 </ul>
                             </div>
                         </div>

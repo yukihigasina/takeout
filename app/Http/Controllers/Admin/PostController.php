@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Post;
+use Auth;
 
 class PostController extends Controller
 {
@@ -17,10 +18,10 @@ class PostController extends Controller
     {
        $cond_storename = $request->cond_storename;
         if($cond_storename != ''){
-            $posts = Post::where('storename', $cond_storename)->get();
+            $posts = Post::where('storename', $cond_storename)->where('user_id', Auth::id())->get();
         }
         else{
-            $posts = Post::all();
+            $posts = Post::where('user_id', Auth::id())->get();
         }
         return view('admin.post.index', ['posts' => $posts, 'cond_storename' => $cond_storename]);
     }
@@ -58,18 +59,15 @@ class PostController extends Controller
         $this->validate($request, Post::$rules);
         $post = new Post; 
         $form = $request->all();
-        
        
         $path = $request->file('image')->store('public/image');
         $post->image_path = basename($path);
         
-        
-         // フォームから送信されてきた_tokenを削除する
         unset($form['_token']);
-         // フォームから送信されてきたimageを削除する
         unset($form['image']);
           
         $post->fill($form);
+        $post->user_id = Auth::id();
         $post->save();
         
         return redirect('admin/post/');
@@ -115,9 +113,9 @@ class PostController extends Controller
     public function update(Request $request,$id)
     {
         
-        // Validationをかける
+        
         $this->validate($request, Post::$rules);
-        // News Modelからデータを取得する
+        // Modelからデータを取得する
         $post = Post::find($request->id);
         // 送信されてきたフォームデータを格納する
         $post_form = $request->all();
@@ -130,7 +128,7 @@ class PostController extends Controller
             unset($post_form['remove']);
         }
         unset($post_form['_token']);
-          // 該当するデータを上書きして保存する
+        // 上書きして保存
         $post->fill($post_form)->save();
         return redirect('admin/post');    
         
