@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Post;
 use Auth;
+use Storage;
 
 class PostController extends Controller
 {
@@ -26,17 +27,7 @@ class PostController extends Controller
         return view('admin.post.index', ['posts' => $posts, 'cond_storename' => $cond_storename]);
     }
     
-        
-        /*$cond_title = $request->cond_title;
-        if($cond_title != ''){
-            $posts = Post::where('title', $cond_title)->get();
-        }
-        else{
-            $posts = Post::all();
-        }
-        return view('admin.post.top', ['posts' => $posts, 'cond_title' => $cond_title]);
-        */
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -59,9 +50,10 @@ class PostController extends Controller
         $this->validate($request, Post::$rules);
         $post = new Post; 
         $form = $request->all();
-       
-        $path = $request->file('image')->store('public/image');
-        $post->image_path = basename($path);
+        
+        $path = Storage::disk('s3')->putFile('/',$form['image'],'public');
+        $post->image_path = Storage::disk('s3')->url($path);
+        
         
         unset($form['_token']);
         unset($form['image']);
@@ -120,8 +112,8 @@ class PostController extends Controller
         // 送信されてきたフォームデータを格納する
         $post_form = $request->all();
         if (isset($post_form['image'])) {
-            $path = $request->file('image')->store('public/image');
-            $post->image_path = basename($path);
+            $path = Storage::disk('s3')->putFile('/',$form['image'],'public');
+            $post->image_path = Storage::disk('s3')->url($path);
             unset($post_form['image']);
         } elseif (isset($request->remove)) {
             $post->image_path = null;

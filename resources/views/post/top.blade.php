@@ -42,7 +42,7 @@
                     <a href="{{route('show',['storename' => $new->storename])}}">
                     <div class="card-columns-new">
                         <div class="card" >
-                            <img class="card-img-top" src="{{ secure_asset('storage/image/'.$new->image_path) }}" >
+                            <img class="card-img-top" src="{{$new->image_path}}" >
                             <div class="card-body">
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item　card-place">店名：{{$new->storename}}</li>
