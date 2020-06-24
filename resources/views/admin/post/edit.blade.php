@@ -44,6 +44,9 @@
                         <div class="col-md-12">
                             <input type="file"  class="form-control-file" name="image" value="{{ $post_form->image }}">
                         </div>
+                        <div class="form-text text-info">
+                            　※画像の入力をお願いします。
+                        </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-md-10">
