@@ -48,7 +48,7 @@
                                 <td>
                                 <div>
                                     <a href="{{ action('Admin\PostController@edit', ['id' => $post->id]) }}" >
-                                        <input type="submit" value="更新"/>
+                                        <input type="submit" value="編集"/>
                                     </a>
                                 </div>
                                 <div>

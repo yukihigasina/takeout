@@ -105,20 +105,20 @@ class PostController extends Controller
     public function update(Request $request,$id)
     {
         
-        
         $this->validate($request, Post::$rules);
         // Modelからデータを取得する
         $post = Post::find($request->id);
         // 送信されてきたフォームデータを格納する
         $post_form = $request->all();
         if (isset($post_form['image'])) {
-            $path = Storage::disk('s3')->putFile('/',$form['image'],'public');
+            $path = Storage::disk('s3')->putFile('/',$post_form['image'],'public');
             $post->image_path = Storage::disk('s3')->url($path);
             unset($post_form['image']);
         } elseif (isset($request->remove)) {
-            $post->image_path = null;
             unset($post_form['remove']);
         }
+        
+        
         unset($post_form['_token']);
         // 上書きして保存
         $post->fill($post_form)->save();
