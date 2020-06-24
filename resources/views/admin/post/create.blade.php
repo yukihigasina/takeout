@@ -45,6 +45,9 @@
                         <div class="col-md-12">
                             <input type="file" class="form-control-file" name="image">
                         </div>
+                        <div class="form-text text-info">
+                            　※画像の入力をお願いします。
+                        </div>
                     </div>
                     {{ csrf_field() }}
                     <input type="submit" class="btn btn-primary" value="投稿">
