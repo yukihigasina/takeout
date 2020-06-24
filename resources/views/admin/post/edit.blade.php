@@ -42,10 +42,11 @@
                     <div class="form-group row">
                         <label class="col-md-12" for="image">画像</label>
                         <div class="col-md-12">
-                            <input type="file"  class="form-control-file" name="image" value="{{ $post_form->image }}">
+                            <img class="card-img-edit" src="{{$post_form->image_path}}" ><br>
+                            <input type="file"  class="form-control-file" name="image">
                         </div>
                         <div class="form-text text-info">
-                            　※画像の入力をお願いします。
+                            　※変更が必要な場合は、画像の入力をお願いします。
                         </div>
                     </div>
                     <div class="form-group row">

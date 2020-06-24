@@ -105,7 +105,7 @@ class PostController extends Controller
     public function update(Request $request,$id)
     {
         
-        $this->validate($request, Post::$rules);
+        $this->validate($request, Post::$update_rules);
         // Modelからデータを取得する
         $post = Post::find($request->id);
         // 送信されてきたフォームデータを格納する
@@ -113,15 +113,13 @@ class PostController extends Controller
         if (isset($post_form['image'])) {
             $path = Storage::disk('s3')->putFile('/',$post_form['image'],'public');
             $post->image_path = Storage::disk('s3')->url($path);
-            unset($post_form['image']);
-        } elseif (isset($request->remove)) {
-            unset($post_form['remove']);
         }
         
-        
+        unset($post_form['image']);
         unset($post_form['_token']);
         // 上書きして保存
         $post->fill($post_form)->save();
+        
         return redirect('admin/post');    
         
         
